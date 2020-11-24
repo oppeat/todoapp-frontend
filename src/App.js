@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import InputTodo from "./components/InputTodo";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
+import "todomvc-common/base.css";
+import "todomvc-app-css/index.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+export default () => (
+  <>
+    <div className="App todoapp">
+      <header className="header">
+        <Header numTodos={10}/>
+        <InputTodo />
       </header>
+      <section className="main">
+      <TodoList tasks={["test","222222"]} />
+      </section>
     </div>
-  );
-}
-
-export default App;
+  </>
+);
