@@ -39,10 +39,7 @@ class App extends Component {
     });
   };
   handleDelete = id => {
-    const filteredItems = this.state.items.filter(item => item.id !== id);
-    this.setState({
-      items: filteredItems
-    });
+    this.deleteTodos(id);
   };
   handleEdit = id => {
     const filteredItems = this.state.items.filter(item => item.id !== id);
@@ -93,6 +90,20 @@ class App extends Component {
     try {
       console.log(JSON.stringify(item));
       axios.put("http://localhost:9000/todos/"+id,item, {
+        headers: {"Access-Control-Allow-Origin": "*"}
+        ,responseType: 'json',
+      }).then(response => {
+        this.getTodos();
+     });
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  deleteTodos = (id) => {
+    try {
+      axios.delete("http://localhost:9000/todos/"+id, {
         headers: {"Access-Control-Allow-Origin": "*"}
         ,responseType: 'json',
       }).then(response => {
