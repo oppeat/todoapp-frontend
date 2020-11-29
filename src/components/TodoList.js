@@ -1,24 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
+import TodoItem from "./TodoItem";
+export default class TodoList extends Component {
+  render() {
+    const { items, clearList, handleDelete, handleEdit } = this.props;
+    return (
+      <ul className="list-group my-5">
+        <h3 className="text-capitalize text-center">todo list</h3>
+        {items.map(item => {
+          return (
+            <TodoItem
+              key={item.id}
+              title={item.title}
+              handleDelete={() => handleDelete(item.id)}
+              handleEdit={() => handleEdit(item.id)}
+            />
+          );
+        })}
 
-const TodoList = (props) => {
-  const todos = props.tasks.map((todo, index) => {
-    return <Todo content={todo} key={index} id={index} />
-  })
-  return( 
-    <div className='list-wrapper'>
-      {todos}
-    </div>
-  );
+        <button
+          type="button"
+          className="btn btn-danger btn-block text-capitalize mt-5"
+          onClick={clearList}
+        >
+          clear list
+        </button>
+      </ul>
+    );
+  }
 }
-
-
-const Todo = (props) => {
-  return(
-    <div className='list-item'>
-      {props.content}
-      <button class="delete is-pulled-right"></button>
-    </div>
-  );
-}
-
-export default TodoList;
