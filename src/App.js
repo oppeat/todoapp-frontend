@@ -63,7 +63,7 @@ class App extends Component {
         ,responseType: 'json',
       }).then(response => {
         console.log('response: ', response);
-        this.setState({...this.state,items:[...response.data],item:"",editItem:false})
+        this.setState({...this.state,items:[...response.data],item:"",editItem:false,id:uuid()})
      });
 
     } catch (error) {
