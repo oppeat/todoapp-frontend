@@ -46,8 +46,6 @@ class App extends Component {
 
     const selectedItem = this.state.items.find(item => item.id === id);
 
-    console.log(selectedItem);
-
     this.setState({
       items: filteredItems,
       item: selectedItem.title,
@@ -62,7 +60,6 @@ class App extends Component {
         headers: {"Access-Control-Allow-Origin": "*"}
         ,responseType: 'json',
       }).then(response => {
-        console.log('response: ', response);
         this.setState({...this.state,items:[...response.data],item:"",editItem:false,id:uuid()})
      });
 
@@ -73,7 +70,6 @@ class App extends Component {
 
   addTodos = (item) => {
     try {
-      console.log(JSON.stringify(item));
       axios.post("http://localhost:9000/todos",item, {
         headers: {"Access-Control-Allow-Origin": "*"}
         ,responseType: 'json',
@@ -88,7 +84,6 @@ class App extends Component {
 
   editTodos = (id,item) => {
     try {
-      console.log(JSON.stringify(item));
       axios.put("http://localhost:9000/todos/"+id,item, {
         headers: {"Access-Control-Allow-Origin": "*"}
         ,responseType: 'json',
